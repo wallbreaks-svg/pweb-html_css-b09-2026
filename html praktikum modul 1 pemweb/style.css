@@ -244,12 +244,12 @@ img {
 @keyframes fadeUp {
     from {
         opacity: 0;
-        transform: translateY(25px);
+        transform: translateX(-45px) translateY(25px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(-45px) translateY(0);
     }
 }
 
@@ -696,7 +696,7 @@ img {
     width: 100%;
     height: 170px;
     object-fit: cover;
-    object-position: center;
+    object-position: center -1%;
 
     margin: 0 auto 25px;
     border: 4px solid #302039;
@@ -1070,8 +1070,42 @@ form button:hover {
 
 @media (max-width: 900px) {
     .foto-section {
-        gap: 45px;
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 35px;
         padding: 65px 5%;
+    }
+
+    .penjelasan {
+        transform: none;
+        animation: none;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .hero-label {
+        display: block;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .interactive-title {
+        white-space: normal;
+        font-size: 40px;
+    }
+
+    .interactive-title > .second-word {
+        margin-left: 0;
+    }
+
+    .foto-image {
+        justify-self: center;
+        width: 85%;
+        max-width: 380px;
+        margin: 0 auto;
     }
 
     .cv-layout {
@@ -1104,6 +1138,13 @@ form button:hover {
         padding: 60px 7%;
     }
 
+    .penjelasan {
+        transform: none;
+        animation: none;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
     .penjelasan h1 {
         font-size: 58px;
         letter-spacing: -3px;
@@ -1119,6 +1160,11 @@ form button:hover {
 
     .hero-buttons {
         justify-content: center;
+        width: 100%;
+    }
+
+    .hero-label {
+        display: block;
     }
 
     .foto-image {
@@ -1133,6 +1179,14 @@ form button:hover {
     .interactive-title {
         font-size: 27px;
         line-height: 1.8;
+    }
+
+    .interactive-title {
+        white-space: normal;
+    }
+
+    .interactive-title > .second-word {
+        margin-left: 0;
     }
 
     .grid-container {
@@ -1173,7 +1227,7 @@ form button:hover {
         align-items: stretch;
         gap: 25px;
         margin-top: 55px;
-        padding: 0 20px;
+        padding: 0 15px;
     }
 
     .cv-layout::before {
@@ -1187,6 +1241,7 @@ form button:hover {
         width: 100%;
         max-width: 100%;
         transform: none;
+        animation: none;   /* ← ini baris baru yang ditambahin */
     }
 
     .cv-sidebar:hover {
@@ -1220,6 +1275,10 @@ form button:hover {
 
     .section h2 {
         font-size: 25px;
+    }
+
+    .section ol {
+        padding-left: 28px;
     }
 
     .tabel-biasa {
@@ -1381,4 +1440,224 @@ form button:hover {
 #kqkj6t span:hover,
 #p6ooit span:hover {
   transform: translateY(-4px);
+}
+
+.logo-img-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
+
+.logo-img-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo-melet {
+  opacity: 0;
+  object-position: 80% center;
+  transition: opacity 0.15s ease;
+}
+
+.logo-link:hover .logo-normal {
+  opacity: 0;
+}
+
+.logo-link:hover .logo-melet {
+  opacity: 1;
+}
+
+/* =========================
+   CV CREATIVE — LEVEL UP
+========================= */
+
+/* Sidebar "pop" masuk pas halaman dibuka */
+@keyframes sidebarPop {
+    0% {
+        opacity: 0;
+        transform: rotate(-2deg) scale(0.85) translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(-2deg) scale(1) translateY(0);
+    }
+}
+
+.cv-sidebar {
+    animation: sidebarPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Badge "PROFILE" mengambang pelan */
+@keyframes floatBadge {
+    0%, 100% { transform: rotate(-7deg) translateY(0); }
+    50% { transform: rotate(-3deg) translateY(-4px); }
+}
+
+.cv-sidebar::before {
+    animation: floatBadge 2.4s ease-in-out infinite;
+}
+
+/* Bintang di sidebar muter pelan */
+@keyframes spinStar {
+    from { transform: rotate(12deg); }
+    to { transform: rotate(372deg); }
+}
+
+.cv-sidebar::after {
+    animation: spinStar 6s linear infinite;
+}
+
+/* Foto profil: efek goyang dikit pas di-hover */
+.cv-sidebar img:hover {
+    transform: rotate(-4deg) scale(1.06);
+    box-shadow: 10px 10px 0 #e93d88;
+}
+
+/* Section CV muncul satu-satu dengan delay beda (staggered) */
+@keyframes sectionRise {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section {
+    animation: sectionRise 0.7s ease both;
+}
+
+.cv-content .section:nth-of-type(1) { animation-delay: 0.05s; }
+.cv-content .section:nth-of-type(2) { animation-delay: 0.15s; }
+.cv-content .section:nth-of-type(3) { animation-delay: 0.25s; }
+.cv-content .section:nth-of-type(4) { animation-delay: 0.35s; }
+.cv-content .section:nth-of-type(5) { animation-delay: 0.45s; }
+
+/* Efek "kilau" nyapu pas section di-hover */
+.section {
+    position: relative;
+    overflow: hidden;
+}
+
+.section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 225, 91, 0.35),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.section:hover::after {
+    left: 150%;
+}
+
+/* Skill pills makin hidup pas hover */
+@keyframes skillPop {
+    0%, 100% { transform: translateY(-5px) rotate(0deg) scale(1); }
+    50% { transform: translateY(-9px) rotate(-4deg) scale(1.08); }
+}
+
+.skills-list li {
+    cursor: pointer;
+}
+
+.skills-list li:hover {
+    animation: skillPop 0.5s ease-in-out infinite;
+    box-shadow: 6px 6px 0 #302039;
+}
+
+/* Baris tabel pendidikan sedikit "naik" pas hover */
+.tabel-biasa tr {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tabel-biasa tbody tr:hover {
+    transform: scale(1.01);
+}
+
+/* Form: input jadi lebih hidup pas fokus */
+form input:focus,
+form select:focus,
+form textarea:focus {
+    transform: translate(-2px, -2px);
+}
+
+/* Tombol form: efek "ditekan" lebih nendang */
+form button:active {
+    transform: translate(4px, 4px) scale(0.96);
+    box-shadow: 0px 0px 0 #302039;
+}
+
+/* Judul "CREATIVE CV" ikutan goyang dikit */
+@keyframes titleWiggle {
+    0%, 100% { transform: rotate(4deg); }
+    50% { transform: rotate(7deg); }
+}
+
+.cv-layout::before {
+    animation: titleWiggle 2s ease-in-out infinite;
+}
+
+/* =========================
+   TEKS SIDEBAR — REAKTIF
+========================= */
+
+/* Nama: goyang dikit + warna kedip pas di-hover */
+@keyframes nameWiggle {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(-2deg) scale(1.03); }
+    75% { transform: rotate(2deg) scale(1.03); }
+}
+
+.cv-sidebar h2 {
+    display: inline-block;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.cv-sidebar h2:hover {
+    color: #e93d88;
+    text-shadow: 4px 4px 0 #302039;
+    animation: nameWiggle 0.5s ease-in-out;
+}
+
+/* "Konten Kreator": naik dikit + warna nyala */
+.cv-sidebar p {
+    display: inline-block;
+    transition: transform 0.25s ease, color 0.25s ease;
+    cursor: pointer;
+}
+
+.cv-sidebar p:hover {
+    transform: translateY(-4px);
+    color: #ffe15b;
+}
+
+/* "Kontak" (h3): mantul-mantul pas hover */
+@keyframes bounceTag {
+    0%, 100% { transform: rotate(-3deg) translateY(0); }
+    50% { transform: rotate(-3deg) translateY(-6px); }
+}
+
+.cv-sidebar h3:hover {
+    animation: bounceTag 0.5s ease-in-out infinite;
+    background: #e93d88;
+    color: #ffffff;
 }
